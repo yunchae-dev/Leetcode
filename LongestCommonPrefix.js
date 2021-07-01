@@ -29,3 +29,33 @@
 // strs[i] consists of only lower-case English letters.
 
 // My solution
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function (strs) {
+  if (strs.length === 1) return strs[0];
+  let temp = strs[0];
+  for (let i = 1; i < strs.length; i++) {
+    for (let j = 0; j < temp.length; j++) {
+      if (strs[i].charAt(j) !== temp.charAt(j)) {
+        temp = temp.substring(0, j);
+      }
+    }
+  }
+  return temp;
+};
+
+// Top voted solution
+var longestCommonPrefix = function (strs) {
+  "use strict";
+  if (strs === undefined || strs.length === 0) {
+    return "";
+  }
+
+  return strs.reduce((prev, next) => {
+    let i = 0;
+    while (prev[i] && next[i] && prev[i] === next[i]) i++;
+    return prev.slice(0, i);
+  });
+};
